@@ -713,6 +713,11 @@ SigSpec RTLILBuilder::add_placeholder_signal(
 	}
 	RTLIL::Wire *wire = canvas->addWire(name, (int)width);
 	wire->attributes = staged_attributes;
+	if (staged_source_range_valid && !wire->attributes.count(ID::src)) {
+		auto src = format_src(staged_source_range);
+		if (!src.empty())
+			wire->attributes[ID::src] = src;
+	}
 	return wire;
 }
 
