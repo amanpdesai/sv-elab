@@ -543,6 +543,8 @@ struct SlangFrontend : Frontend
 				return;
 			}
 
+			driver.optionallyWriteDepFiles();
+
 			if (settings.ast_compilation_only.value_or(false)) {
 				(void)driver.reportDiagnostics(/* quiet */ false);
 				return;
